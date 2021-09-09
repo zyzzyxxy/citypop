@@ -24,6 +24,12 @@
   color:crimson;
 }
 
+.header-2{
+  display:block;
+  margin: 10px auto;
+  text-align: center;
+}
+
 .button:hover {
   background-color: #0e8012; /* Green */
   color: white;
@@ -69,3 +75,14 @@
   font-size: 16px;
   border-radius: 8px;
 }
+.inputText{
+  display:block;
+  margin: 10px auto;
+}
+
+.search-btn{
+  display:block;
+  margin: 10px auto;
+}
+
+

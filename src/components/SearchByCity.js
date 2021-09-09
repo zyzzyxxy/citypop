@@ -1,7 +1,7 @@
 const SearchByCity = () => {
     return (
         <>
-            <h2>SEARCH BY CITY</h2>
+            <h2>SEARCH BY CITY</h2> 
         </>
     )
 }
