@@ -1,7 +1,11 @@
+import Header from "./components/Header";
+import FirstPageButtons from "./components/FirstPageButtons";
+
 function App() {
   return (
-    <div className="App">
-    
+    <div className='container'>
+      <Header title='CityPop'/>
+      <FirstPageButtons />
     </div>
   );
 }
