@@ -1,9 +1,11 @@
-const BigButton = ({title, onClick}) => {
-    return (
-        <button className='button'>
-            {title}
-        </button>
-    )
-}
+import { Link } from "react-router-dom";
 
-export default BigButton
+const BigButton = ({ title, onClick, routeTo }) => {
+  return (
+    <Link to={routeTo}>
+      <button className="button">{title}</button>
+    </Link>
+  );
+};
+
+export default BigButton;
