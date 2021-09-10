@@ -1,8 +1,8 @@
-const Country = () => {
+const Country = ({countryName, name, population}) => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <h3>{countryName}  {name}  {population}</h3>
+        </>
     )
 }
 

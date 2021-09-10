@@ -1,8 +1,10 @@
-const City = () => {
+const City = ({population, name}) => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <p>{name}</p>
+            <h3>POPULATION</h3>
+            <p>{population}</p>
+        </>
     )
 }
 
