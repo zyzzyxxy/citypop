@@ -92,7 +92,6 @@ function App() {
             cityOrCountry = {cityOrCountry}
             loading = {loading}
             onCityClick = {onCityClick}
-
           />
         </Route>
 

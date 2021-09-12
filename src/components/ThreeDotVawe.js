@@ -49,7 +49,7 @@ export default function ThreeDotsWave({visible}) {
   return (
     <div id="loadingDiv" style={ visible ? {visibility:'visible'} : {visibility:'hidden'}}>
       <h3>Searching</h3>
-      <motion.div
+      <motion.div 
         style={loadingContainer}
         variants={loadingContainerVariants}
         initial="start"
