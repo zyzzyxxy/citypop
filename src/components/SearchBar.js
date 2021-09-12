@@ -7,6 +7,8 @@ const SearchBar = ({
   searchFunction,
   updateSearchWord,
   searchFor,
+  routeToResult,
+  gotResult
 }) => {
   const location = useLocation();
   const updateSearchFor = () => {
@@ -24,7 +26,7 @@ const SearchBar = ({
         className="inputText"
         onChange={(e) => updateSearchWord(e.target.value)}
       />
-      <SearchButton searchFunction={searchFunction} />
+      <SearchButton searchFunction={searchFunction} gotResult = {gotResult}/>
     </>
   );
 };

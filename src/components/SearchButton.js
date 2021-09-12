@@ -1,12 +1,15 @@
-import {Link} from "react-router-dom"
+import { Link, useHistory, Redirect } from "react-router-dom";
 
-const SearchButton = ({searchFunction}) => {
+const SearchButton = ({ searchFunction, gotResult }) => {
+    console.log("gotRersult", gotResult)
 
-    return (
-        <button className='search-btn' onClick={searchFunction}>
-            Search
-        </button>
-    )
-}
+return (
+    <Link to="/results" style={{textDecoration:'none'}}>
+    <button className="search-btn" onClick={searchFunction}>
+      Search
+    </button>
+    </Link>
+  );
+};
 
-export default SearchButton
+export default SearchButton;

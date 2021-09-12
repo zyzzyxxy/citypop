@@ -1,24 +1,41 @@
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import FirstPageButtons from "./components/FirstPageButtons";
 import SearchBar from "./components/SearchBar";
 import SearchResultView from "./components/SearchResultView";
+import ThreeDotsWave from "./components/ThreeDotVawe";
+import sleep from "./Sleep";
 
 function App() {
   const [searchWord, setSearchWord] = useState("");
   const [cityOrCountry, setCityOrCountry] = useState("");
-  const [searchResult, setResult] = useState([]);
+  const [searchResult, setResult] = useState([{totalResultsCount:0}]);
+  const [loading, setLoading] = useState(false);
+  const [gotResult, setGotresult] = useState(false);
+
+  const maxRowsForCountry = 5;
 
   const search = async () => {
+    //For animation
+    setLoading(true);
+
+    //Just for testing animation when loading
+    await sleep(2000);
     console.log("Searching for: ", cityOrCountry, searchWord);
     cityOrCountry === "country"
       ? await getSearchResultsCountry()
       : await getSearchResultsCity();
     console.log("tot res count: ", searchResult.totalResultsCount);
+    setGotresult(0<searchResult.totalResultsCount);
+
+    //For stopping animation
+    setLoading(false);
     updateSearchResultView();
-  };
+  
+  }
+
 
   function updateSearchResultView() {
     console.log("updating view");
@@ -26,7 +43,7 @@ function App() {
 
   const getSearchResultsCountry = async () => {
     const res = await fetch(
-      `http://api.geonames.org/searchJSON?q=${searchWord}&maxRows=3&orderby=population&cities=cities15000&username=weknowit`
+      `http://api.geonames.org/searchJSON?q=${searchWord}&maxRows=${maxRowsForCountry}&orderby=population&cities=cities15000&username=weknowit`
     );
     const data = await res.json();
     setResult(data);
@@ -41,22 +58,6 @@ function App() {
     console.log(data);
   };
 
-  // useEffect(() => {
-  //   const getTasks = async () => {
-  //     const tasksFromServer = await fetchTasks();
-  //     setTasks(tasksFromServer);
-  // };
-
-  //   getTasks();
-  // }, []);
-
-  // const fetchTasks = async () => {
-  //   const res = await fetch("http://localhost:5000/tasks");
-  //   const data = await res.json();
-
-  //   return data;
-  // };
-
   return (
     <Router>
       <div className="container">
@@ -70,6 +71,7 @@ function App() {
             searchFunction={search}
             updateSearchWord={setSearchWord}
             searchFor={setCityOrCountry}
+            gotResult = {gotResult}
           />
         </Route>
         <Route path="/country">
@@ -79,16 +81,22 @@ function App() {
             searchFunction={search}
             updateSearchWord={setSearchWord}
             searchFor={setCityOrCountry}
+            routeToResult={searchResult.totalResultsCount > 0}
+            gotResult = {gotResult}
           />
         </Route>        
         <Route path="/results">
-
-        </Route>
         <SearchResultView
             result = {searchResult}
             cityOrCountry = {cityOrCountry}
+            loading = {loading}
 
           />
+        </Route>
+
+          {/* This should probably be done withouth hiding, but contitionally loading */}
+          <ThreeDotsWave visible={loading} />
+          
       </div>
     </Router>
   );
