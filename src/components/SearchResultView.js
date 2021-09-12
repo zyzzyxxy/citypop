@@ -1,7 +1,9 @@
 import City from "./City";
-import Country from "./Country";
+import CityClickable from "./CityClickable";
 
-const SearchResultView = ({ result, cityOrCountry, loading }) => {
+const SearchResultView = ({ result, cityOrCountry, loading, onCityClick}) => {  
+    console.log('oncityClick: ', onCityClick)
+
   return (
       !loading &&
     <>
@@ -18,7 +20,7 @@ const SearchResultView = ({ result, cityOrCountry, loading }) => {
           ))
         ) : (
           result.geonames.map((res) => (
-            <Country name={res.name} population={res.population} />
+            <CityClickable result={res} name={res.name} population={res.population} onClick={onCityClick}/>
           ))
         )
       ) : (result === undefined?

@@ -11,9 +11,15 @@
 
 }
 
-#loadingDiv {
-  /* visibility: hidden; */
-}
+.cityClickable{
+  max-width: 500px;
+  margin: 10px auto;
+  overflow: auto;
+  min-height: 50;
+  border: 1px solid steelblue;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;}
 
 
 .header {

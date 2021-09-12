@@ -22,7 +22,7 @@ function App() {
     setLoading(true);
 
     //Just for testing animation when loading
-    await sleep(2000);
+    await sleep(1000);
     console.log("Searching for: ", cityOrCountry, searchWord);
     cityOrCountry === "country"
       ? await getSearchResultsCountry()
@@ -32,14 +32,15 @@ function App() {
 
     //For stopping animation
     setLoading(false);
-    updateSearchResultView();
   
   }
-
-
-  function updateSearchResultView() {
-    console.log("updating view");
+  const onCityClick = (updatedResult) => {
+    console.log(updatedResult)
+    // s newResult = searchResult.filter((item) => item.geonames.name !== updatedResult.name)
+    setResult({geonames:[updatedResult],totalResultsCount:1 });
+    setCityOrCountry("city");
   }
+
 
   const getSearchResultsCountry = async () => {
     const res = await fetch(
@@ -81,7 +82,7 @@ function App() {
             searchFunction={search}
             updateSearchWord={setSearchWord}
             searchFor={setCityOrCountry}
-            routeToResult={searchResult.totalResultsCount > 0}
+            routeToResult={typeof searchResult !== 'undefined' && searchResult.totalResultsCount > 0}
             gotResult = {gotResult}
           />
         </Route>        
@@ -90,6 +91,7 @@ function App() {
             result = {searchResult}
             cityOrCountry = {cityOrCountry}
             loading = {loading}
+            onCityClick = {onCityClick}
 
           />
         </Route>
