@@ -1,6 +1,6 @@
 import BigButton from "./BigButton";
 
-const FirstPageButtons = (props) => {
+const FirstPageButtons = () => {
   return (
     <>
       <BigButton title='SEARCH BY CITY' routeTo="/city" />

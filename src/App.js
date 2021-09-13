@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Link, Redirect, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { useState } from "react";
 
 import Header from "./components/Header";
 import FirstPageButtons from "./components/FirstPageButtons";
@@ -11,7 +11,7 @@ import sleep from "./Sleep";
 function App() {
   const [searchWord, setSearchWord] = useState("");
   const [cityOrCountry, setCityOrCountry] = useState("");
-  const [searchResult, setResult] = useState([{totalResultsCount:0}]);
+  const [searchResult, setResult] = useState([{ totalResultsCount: 0 }]);
   const [loading, setLoading] = useState(false);
   const [gotResult, setGotresult] = useState(false);
 
@@ -23,24 +23,22 @@ function App() {
 
     //Just for testing animation when loading
     await sleep(1000);
-    console.log("Searching for: ", cityOrCountry, searchWord);
+
     cityOrCountry === "country"
       ? await getSearchResultsCountry()
       : await getSearchResultsCity();
-    console.log("tot res count: ", searchResult.totalResultsCount);
-    setGotresult(0<searchResult.totalResultsCount);
+    setGotresult(0 < searchResult.totalResultsCount);
 
     //For stopping animation
     setLoading(false);
-  
-  }
-  const onCityClick = (updatedResult) => {
-    console.log(updatedResult)
-    // s newResult = searchResult.filter((item) => item.geonames.name !== updatedResult.name)
-    setResult({geonames:[updatedResult],totalResultsCount:1 });
-    setCityOrCountry("city");
-  }
+  };
 
+  //Filters resultlist when clicking a specific city
+  const onCityClick = (updatedResult) => {
+    console.log(updatedResult);
+    setResult({ geonames: [updatedResult], totalResultsCount: 1 });
+    setCityOrCountry("city");
+  };
 
   const getSearchResultsCountry = async () => {
     const res = await fetch(
@@ -50,6 +48,7 @@ function App() {
     setResult(data);
     console.log(data);
   };
+
   const getSearchResultsCity = async () => {
     const res = await fetch(
       `http://api.geonames.org/searchJSON?q=${searchWord}&maxRows=1&username=weknowit`
@@ -72,7 +71,6 @@ function App() {
             searchFunction={search}
             updateSearchWord={setSearchWord}
             searchFor={setCityOrCountry}
-            gotResult = {gotResult}
           />
         </Route>
         <Route path="/country">
@@ -82,22 +80,19 @@ function App() {
             searchFunction={search}
             updateSearchWord={setSearchWord}
             searchFor={setCityOrCountry}
-            routeToResult={typeof searchResult !== 'undefined' && searchResult.totalResultsCount > 0}
-            gotResult = {gotResult}
           />
-        </Route>        
+        </Route>
         <Route path="/results">
-        <SearchResultView
-            result = {searchResult}
-            cityOrCountry = {cityOrCountry}
-            loading = {loading}
-            onCityClick = {onCityClick}
+          <SearchResultView
+            result={searchResult}
+            cityOrCountry={cityOrCountry}
+            loading={loading}
+            onCityClick={onCityClick}
           />
         </Route>
 
-          {/* This should probably be done withouth hiding, but contitionally loading */}
-          <ThreeDotsWave visible={loading} />
-          
+        {/* This could probably be done better withouth hiding, but contitionally loading */}
+        <ThreeDotsWave visible={loading} />
       </div>
     </Router>
   );

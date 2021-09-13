@@ -6,9 +6,7 @@ const SearchBar = ({
   placeholder,
   searchFunction,
   updateSearchWord,
-  searchFor,
-  routeToResult,
-  gotResult
+  searchFor
 }) => {
   const location = useLocation();
   const updateSearchFor = () => {
@@ -16,6 +14,16 @@ const SearchBar = ({
   };
 
   const res = updateSearchFor();
+
+  const checkForEnterKey = (event) => {
+    console.log("checking for enter")
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("searchButton").click();
+        //searchFunction();
+        // document.getElementById("myBtn").click();
+    }
+}
 
   return (
     <>
@@ -25,8 +33,10 @@ const SearchBar = ({
         placeholder={placeholder}
         className="inputText"
         onChange={(e) => updateSearchWord(e.target.value)}
+        onKeyDown={(e)=>checkForEnterKey(e)}
+        
       />
-      <SearchButton searchFunction={searchFunction} gotResult = {gotResult}/>
+      <SearchButton searchFunction={searchFunction} />
     </>
   );
 };

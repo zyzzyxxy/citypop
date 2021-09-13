@@ -1,13 +1,11 @@
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const SearchButton = ({ searchFunction, gotResult }) => {
-    console.log("gotRersult", gotResult)
-
-return (
-    <Link to="/results" style={{textDecoration:'none'}}>
-    <button className="search-btn" onClick={searchFunction}>
-      Search
-    </button>
+const SearchButton = ({ searchFunction }) => {
+  return (
+    <Link to="/results" style={{ textDecoration: "none" }}>
+      <button id="searchButton" className="search-btn" onClick={searchFunction}>
+        Search
+      </button>
     </Link>
   );
 };
