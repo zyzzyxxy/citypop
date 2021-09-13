@@ -2,7 +2,6 @@ import City from "./City";
 import CityClickable from "./CityClickable";
 
 const SearchResultView = ({ result, cityOrCountry, loading, onCityClick }) => {
-  console.log("oncityClick: ", onCityClick);
 
   return (
     !loading && (

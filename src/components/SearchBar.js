@@ -16,7 +16,6 @@ const SearchBar = ({
   const res = updateSearchFor();
 
   const checkForEnterKey = (event) => {
-    console.log("checking for enter")
     if (event.keyCode === 13) {
         event.preventDefault();
         document.getElementById("searchButton").click();

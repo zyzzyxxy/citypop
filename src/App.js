@@ -35,7 +35,6 @@ function App() {
 
   //Filters resultlist when clicking a specific city
   const onCityClick = (updatedResult) => {
-    console.log(updatedResult);
     setResult({ geonames: [updatedResult], totalResultsCount: 1 });
     setCityOrCountry("city");
   };
@@ -46,7 +45,6 @@ function App() {
     );
     const data = await res.json();
     setResult(data);
-    console.log(data);
   };
 
   const getSearchResultsCity = async () => {
@@ -55,7 +53,6 @@ function App() {
     );
     const data = await res.json();
     setResult(data);
-    console.log(data);
   };
 
   return (

@@ -45,7 +45,6 @@ const loadingCircleTransition = {
 };
 
 export default function ThreeDotsWave({visible}) {
-    console.log('Visible',visible);
   return (
     <div id="loadingDiv" style={ visible ? {visibility:'visible'} : {visibility:'hidden'}}>
       <h3>Searching</h3>
