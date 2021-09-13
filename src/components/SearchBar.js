@@ -19,8 +19,6 @@ const SearchBar = ({
     if (event.keyCode === 13) {
         event.preventDefault();
         document.getElementById("searchButton").click();
-        //searchFunction();
-        // document.getElementById("myBtn").click();
     }
 }
 

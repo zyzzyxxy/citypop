@@ -60,7 +60,6 @@ function App() {
       <div className="container">
         <Header title="CityPop" />
         <Route path="/" exact component={FirstPageButtons} />
-        {/* <Route path="/city" component={SearchByCity} /> */}
         <Route path="/city">
           <SearchBar
             title="SEARCH BY CITY"
